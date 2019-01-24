@@ -1,0 +1,31 @@
+{
+  "name": "schematics-doc",
+  "version": "0.0.0",
+  "description": "A blank schematics",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && jasmine src/**/*_spec.js",
+    "clean": "git checkout HEAD -- sandbox && git clean -f -d sandbox",
+    "launch": "cd sandbox && ng g schematics-doc:schematics-doc",
+    "clean:launch": "npm run clean && npm run launch",
+    "build:clean:launch": "npm run build && npm run clean && npm run launch",
+    "link:schematics": "npm link && cd sandbox && npm link schematics-doc"
+  },
+  "keywords": [
+    "schematics"
+  ],
+  "author": "",
+  "license": "MIT",
+  "schematics": "./src/collection.json",
+  "dependencies": {
+    "@angular-devkit/core": "^7.1.4",
+    "@angular-devkit/schematics": "^7.1.4",
+    "@types/jasmine": "^2.6.0",
+    "@types/node": "^8.0.31",
+    "jasmine": "^2.8.0",
+    "typescript": "~3.1.6"
+  },
+  "devDependencies": {
+    "schematics-sandbox": "github:pastabolo/schematics-sandbox"
+  }
+}
