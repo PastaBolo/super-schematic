@@ -3,7 +3,22 @@
   "schematics": {
     "schematics-doc": {
       "description": "A blank schematic.",
-      "factory": "./schematics-doc/index#schematicsDoc"
+      "factory": "./schematics-doc"
+    },
+    "add-uijar-dependency": {
+      "description": "Install the ui-jar package",
+      "factory": "./schematics-doc/index#addUIJarDependency",
+      "private": true
+    },
+    "generate-uijar-app": {
+      "description": "Generate the ui-jar application",
+      "factory": "./schematics-doc/index#generateUIJarProject",
+      "private": true
+    },
+    "setup-uijar-app": {
+      "description": "Sets up the uijar application after the generation of the ui-jar app",
+      "factory": "./schematics-doc/index#setupUIJarProject",
+      "private": true
     }
   }
 }
