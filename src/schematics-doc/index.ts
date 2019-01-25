@@ -46,7 +46,13 @@ function addUIJarDependency(): Rule {
 }
 
 function setupUIJarProject(): Rule {
-  return chain([updateTsConfig(), replaceFiles()])
+  return chain([addScriptsToPackageJson(), updateTsConfig(), replaceFiles()])
+}
+
+function addScriptsToPackageJson(): Rule {
+  return (tree: Tree, _context: SchematicContext) => {
+    tree.read('./package.json')
+  }
 }
 
 function updateTsConfig(): Rule {
@@ -67,8 +73,14 @@ function updateTsConfig(): Rule {
 
 function replaceFiles(): Rule {
   return (tree: Tree, _context: SchematicContext) => {
-    //TODO: Add the main.ts file
-    tree.delete('./projects/ui-jar/src/index.html')
+    deleteFile(tree, './projects/ui-jar/src/index.html')
+    deleteFile(tree, './projects/ui-jar/src/main.ts')
+    deleteFile(tree, './projects/ui-jar/src/styles.css')
+
     mergeWith(apply(url('./files'), [move('./projects/ui-jar/src')]))
   }
+}
+
+function deleteFile(tree: Tree, path: string): void {
+  if (tree.exists(path)) tree.delete(path)
 }
