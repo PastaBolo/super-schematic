@@ -8,7 +8,7 @@
     "skipInstall": {
       "description": "When true, does not install dependency packages.",
       "type": "boolean",
-      "default": true
+      "default": false
     }
   }
 }

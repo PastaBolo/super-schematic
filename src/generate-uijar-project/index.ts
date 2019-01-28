@@ -21,7 +21,6 @@ import { Schema as ApplicationOptions } from '@schematics/angular/application/sc
 import { Schema as GenerateUiJarProjectOptions } from './schema'
 
 export default function(options: GenerateUiJarProjectOptions): Rule {
-  console.log(options)
   return chain([
     (_tree: Tree, context: SchematicContext) => {
       !options.skipInstall ? context.addTask(new NodePackageInstallTask()) : noop()
@@ -55,11 +54,8 @@ function addScriptsToPackageJson(): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     const json = JSON.parse(tree.read('./package.json')!.toString('utf-8'))
 
-    json.scripts = {
-      ...json.scripts,
-      'ui-jar': 'node node_modules/ui-jar/dist/bin/cli.js --directory ./src/app/ --includes \\.ts$',
-      'start:ui-jar': 'npm run ui-jar && ng serve ui-jar'
-    }
+    json.scripts['start:ui-jar'] =
+      'node node_modules/ui-jar/dist/bin/cli.js --directory ./src/app/ --includes \\.ts$ && ng serve ui-jar'
 
     tree.overwrite('./package.json', JSON.stringify(json, null, 2))
   }

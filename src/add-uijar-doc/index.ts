@@ -79,15 +79,12 @@ function addScriptsToPackageJson(options: AddUiJarDocOptions): Rule {
     const srcDirectory = `./projects/${options.project}/src/${subDirectories[projectType]}/`
 
     const json = JSON.parse(tree.read('./package.json')!.toString('utf-8'))
-    json.scripts = {
-      ...json.scripts,
-      [`ui-jar:${
-        options.project
-      }`]: `node node_modules/ui-jar/dist/bin/cli.js --directory ${srcDirectory} --includes \\.ts$`,
-      [`start:ui-jar:${options.project}`]: `npm run ui-jar:${
-        options.project
-      } && ng serve ui-jar -c=${options.project}`
-    }
+
+    json.scripts[
+      `start:ui-jar:${options.project}`
+    ] = `node node_modules/ui-jar/dist/bin/cli.js --directory ${srcDirectory} --includes \\.ts$ && ng serve ui-jar -c=${
+      options.project
+    }`
 
     tree.overwrite('./package.json', JSON.stringify(json, null, 2))
   }
