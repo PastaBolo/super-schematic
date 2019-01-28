@@ -16,14 +16,17 @@ import {
   NodeDependencyType
 } from '@schematics/angular/utility/dependencies'
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks'
+import { Schema as ApplicationOptions } from '@schematics/angular/application/schema'
 
-export default function(options: any): Rule {
+import { Schema as GenerateUiJarProjectOptions } from './schema'
+
+export default function(options: GenerateUiJarProjectOptions): Rule {
   console.log(options)
   return chain([
     (_tree: Tree, context: SchematicContext) => {
       !options.skipInstall ? context.addTask(new NodePackageInstallTask()) : noop()
     },
-    externalSchematic('@schematics/angular', 'application', {
+    externalSchematic<ApplicationOptions>('@schematics/angular', 'application', {
       name: 'ui-jar',
       skipInstall: true,
       minimal: true

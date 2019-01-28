@@ -5,15 +5,6 @@
   "type": "object",
   "description": "Adds an ui-jar project to generate UI libraries.",
   "properties": {
-    "name": {
-      "description": "The name of the ui-jar project",
-      "type": "string",
-      "$default": {
-        "$source": "argv",
-        "index": 0
-      },
-      "x-prompt": "What name would you like to use for the new workspace and initial project?"
-    },
     "skipInstall": {
       "description": "When true, does not install dependency packages.",
       "type": "boolean",

@@ -1,15 +1,17 @@
 {
-  "name": "schematics-doc",
+  "name": "ui-jar-schematics",
   "version": "0.0.0",
   "description": "A blank schematics",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && jasmine src/**/*_spec.js",
     "clean": "git checkout HEAD -- sandbox && git clean -f -d sandbox",
-    "launch": "cd sandbox && ng g schematics-doc:schematics-doc",
+    "launch": "cd sandbox && ng g ui-jar-schematics:generate-uijar-project",
     "clean:launch": "npm run clean && npm run launch",
     "build:clean:launch": "npm run build && npm run clean && npm run launch",
-    "link:schematics": "npm link && cd sandbox && npm link schematics-doc"
+    "launch:add-doc": "cd sandbox && ng g ui-jar-schematics:add-uijar-doc",
+    "build:launch:add-doc": "npm run build && npm run launch:add-doc",
+    "link:schematics": "npm link && cd sandbox && npm link ui-jar-schematics"
   },
   "keywords": [
     "schematics"
